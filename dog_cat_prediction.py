@@ -1,12 +1,12 @@
 import streamlit as st
+from fastai.vision.all import *
 
+st.title(":orange[Pet Breed Classifier!]")
+st.text("Hello, this is Clayton")
 
-# st.title("Cat or Dog Classifier")
-# st.text("Hello this is Clayton")
+cat_vs_dog_model = load_learner("cat_vs_dog.pkl")
 
-
-
-uploaded_file = st.file_uploader("Choose as image...", type=["jpg", "png", "jpeg"])
+uploaded_file = st.file_uploader("Upload your file here", type=["jpg", "png", "jpeg"])
 if uploaded_file is not None:
     fastai_img = PILImage.create(uploaded_file)
     prediction = cat_vs_dog_model.predict(fastai_img)
@@ -35,4 +35,3 @@ def extract_breed_name(filename):
 print(extract_breed_name("Abyssinian_1.jpg"))              # "Abyssinian"
 print(extract_breed_name("english_cocker_spaniel_35.jpg")) # "english_cocker_spaniel"
 print(extract_breed_name("english_setter_178.jpg"))        # "english_setter"
-
